@@ -11,13 +11,9 @@ namespace TripleSoftware.NeoRhtyhm.Views
     class PercentageView : BaseView
     {
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void DoPaint(PaintEventArgs e)
         {
-            Font font = new Font("Tahoma", 8f, FontStyle.Bold);
-
-            MyDate mydate = new MyDate();
-
-            e.Graphics.DrawString(mydate.Date, mydate.Font, new SolidBrush(Color.White), 20, 2);
+            Font font = new Font("Tahoma", 8f, FontStyle.Regular);
 
             e.Graphics.DrawString("Physical: ", font, new SolidBrush(Color.Red), 4, 25);
             e.Graphics.DrawString("Emotinal: ", font, new SolidBrush(Color.Green), 4, 40);
