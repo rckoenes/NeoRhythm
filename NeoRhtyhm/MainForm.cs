@@ -30,6 +30,7 @@ namespace TripleSoftware.NeoRhtyhm
         private void MainForm_Load(object sender, EventArgs e)
         {
             tabView.SelectedIndex = 0;
+            standardGraphView.Show();
             tabView.Show();
             standardGraphView.Invalidate();
         }
