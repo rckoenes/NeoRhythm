@@ -1,5 +1,5 @@
 using Neonode.Forms;
-using TripleSoftware.NeoRhtyhm;
+using TripleSoftware.NeoRhythm;
 using System;
 using System.Windows.Forms;
 

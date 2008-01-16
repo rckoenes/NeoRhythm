@@ -1,25 +1,65 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Neonode.Forms;
-using System.Drawing;
-using TripleSoftware.NeoRhtyhm.Data;
+using TripleSoftware.NeoRhythm.Data;
 
-
-namespace TripleSoftware.NeoRhtyhm.Views
+namespace TripleSoftware.NeoRhythm.Views
 {
-    class PercentageView : BaseView
-    {
+	/// <summary>
+	/// Description of PercentageView.
+	/// </summary>
+	public class PercentageView : ListView
+	{
+		private BiorhythmCalculator calculator;
+		
+		private ListViewItem physicalListItem;
+		private ListViewItem emotionalListItem;
+		private ListViewItem intellectualListItem;
+        private ListViewItem birthDateListItem;
+		
+		public PercentageView(BiorhythmCalculator calculator)
+		{
+			this.calculator = calculator;
+            calculator.Updated += new EventHandler(OnCalculatorUpdate);
 
-        protected override void DoPaint(PaintEventArgs e)
+			this.Title.Text = calculator.CurrentDate.ToShortDateString();
+
+            birthDateListItem = new ListViewItem();
+            physicalListItem = new ListViewItem();
+            emotionalListItem = new ListViewItem();
+            intellectualListItem = new ListViewItem();
+
+            OnCalculatorUpdate(this, EventArgs.Empty);
+
+            birthDateListItem.Description = "Your birthdate, tap to set";
+
+			this.Items.Add(birthDateListItem);
+			this.Items.Add(physicalListItem);
+			this.Items.Add(emotionalListItem);
+			this.Items.Add(intellectualListItem);
+
+            this.Click += new EventHandler(OnClick);
+		}
+
+        private void OnCalculatorUpdate(object sender, EventArgs e) 
         {
-            Font font = new Font("Tahoma", 8f, FontStyle.Regular);
-
-            e.Graphics.DrawString("Physical: ", font, new SolidBrush(Color.Red), 4, 25);
-            e.Graphics.DrawString("Emotinal: ", font, new SolidBrush(Color.Green), 4, 40);
-            e.Graphics.DrawString("Intellectua: ", font, new SolidBrush(Color.Yellow), 4, 54);
-
-            base.OnPaint(e);
+            birthDateListItem.Text = "Birthdate: " + calculator.BirthDate.ToShortDateString();
+            physicalListItem.Text = "Physical: " + calculator.Physical.ToString();
+            emotionalListItem.Text = "Emotional: " + calculator.Emotional.ToString();
+            intellectualListItem.Text = "Intellectual: " + calculator.Intellactual.ToString();
         }
-    }
+
+        private void OnClick(object o, EventArgs e)
+        {
+            if (birthDateListItem.Selected) {
+                DatePicker datePicker = new DatePicker(this);
+                datePicker.Value = calculator.BirthDate;
+                if (datePicker.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    calculator.BirthDate = datePicker.Value;
+
+                datePicker.Dispose();
+            }
+        }
+
+
+	}
 }

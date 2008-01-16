@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Neonode.Forms;
 using System.Drawing;
-using TripleSoftware.NeoRhtyhm.Data;
+using TripleSoftware.NeoRhythm.Data;
 
-namespace TripleSoftware.NeoRhtyhm.Views
+namespace TripleSoftware.NeoRhythm.Views
 {
-    class ExtraGraphView : BaseView
+    class ExtraGraphView
     {
 
-        protected override void DoPaint(PaintEventArgs e)
+        protected void DoPaint(PaintEventArgs e)
         {
 
-            base.DoPaint(e);
         }
     }
 }

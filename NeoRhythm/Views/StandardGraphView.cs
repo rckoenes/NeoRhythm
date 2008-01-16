@@ -2,31 +2,46 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.ComponentModel;
 using Neonode.Forms;
-using System.Drawing;
-using TripleSoftware.NeoRhtyhm.Data;
+using TripleSoftware.NeoRhythm.Data;
 
-namespace TripleSoftware.NeoRhtyhm.Views
+namespace TripleSoftware.NeoRhythm.Views
 {
-    class StandardGraphView : BaseView
+    public class StandardGraphView : CustomView
     {
-        protected override void DoPaint(PaintEventArgs e)
-        {
-            base.DoPaint(e);
+        private BiorhythmCalculator calculator;
 
-            Pen _pen = new Pen(Color.Red);
-            Point[] _points = new Point[5];
-            _points[0].X = 0;
-            _points[0].Y = 0;
-            _points[1].X = 57;
-            _points[1].Y = 83;
-            _points[2].X = 59;
-            _points[2].Y = 87;
-            _points[3].X = 52;
-            _points[3].Y = 85;
-            _points[4].X = 45;
-            _points[4].Y = 95;
-            e.Graphics.DrawLines(_pen, _points);
+        public StandardGraphView(BiorhythmCalculator calculator)
+        {
+            this.calculator = calculator;
+            this.Title.Text = calculator.CurrentDate.ToShortDateString();
+            calculator.Updated += new EventHandler(OnCalculatorUpdate);
+
+            this.LeftSweep.Occurred += new System.ComponentModel.CancelEventHandler(LeftSweep_Occurred);
+            this.LeftSweep.Enabled = true;
+
+            this.RightSweep.Occurred += new System.ComponentModel.CancelEventHandler(RightSweep_Occurred);
+            this.RightSweep.Enabled = true;
+        }
+
+        private void LeftSweep_Occurred(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void RightSweep_Occurred(object sender,CancelEventArgs e)
+        {
+            
+        }
+
+        private void OnCalculatorUpdate(object sender, EventArgs e)
+        {
+            this.Description.Text = "Biorhythm for : " + calculator.BirthDate.ToShortDateString();
+        }
+
+        protected void DoPaint(PaintEventArgs e)
+        {
 
         }
     }
