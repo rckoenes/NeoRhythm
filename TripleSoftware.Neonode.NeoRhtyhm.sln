@@ -1,7 +1,7 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeoRhtyhm", "NeoRhtyhm\NeoRhtyhm.csproj", "{6FC6C0EA-92EE-4FEE-A330-D81A09028E6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeoRhythm", "NeoRhythm\NeoRhtyhm.csproj", "{6FC6C0EA-92EE-4FEE-A330-D81A09028E6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
