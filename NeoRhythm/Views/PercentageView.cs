@@ -15,6 +15,7 @@ namespace TripleSoftware.NeoRhythm.Views
 		private ListViewItem emotionalListItem;
 		private ListViewItem intellectualListItem;
         private ListViewItem birthDateListItem;
+        private ListViewItem daysOldListItem;
 		
 		public PercentageView(BiorhythmCalculator calculator)
 		{
@@ -24,6 +25,7 @@ namespace TripleSoftware.NeoRhythm.Views
 			this.Title.Text = calculator.CurrentDate.ToShortDateString();
 
             birthDateListItem = new ListViewItem();
+            daysOldListItem = new ListViewItem();
             physicalListItem = new ListViewItem();
             emotionalListItem = new ListViewItem();
             intellectualListItem = new ListViewItem();
@@ -33,7 +35,8 @@ namespace TripleSoftware.NeoRhythm.Views
             birthDateListItem.Description = "Your birthdate, tap to set";
 
 			this.Items.Add(birthDateListItem);
-			this.Items.Add(physicalListItem);
+            this.Items.Add(daysOldListItem);
+            this.Items.Add(physicalListItem);
 			this.Items.Add(emotionalListItem);
 			this.Items.Add(intellectualListItem);
 
@@ -51,6 +54,7 @@ namespace TripleSoftware.NeoRhythm.Views
             intellactual = Convert.ToInt32((Math.Round(calculator.Intellactual, 0) + 100) / 2);
 
             birthDateListItem.Text = "Birthdate: " + calculator.BirthDate.ToShortDateString();
+            daysOldListItem.Text = String.Format("You are {0} days old.", calculator.DaysSinceBirth);
             physicalListItem.Text = String.Format("Physical: {0}%", physical);
             emotionalListItem.Text = String.Format("Emotional: {0}%", emotional);
             intellectualListItem.Text = String.Format("Intellectual: {0}%", intellactual);
@@ -62,6 +66,7 @@ namespace TripleSoftware.NeoRhythm.Views
         {
             if (birthDateListItem.Selected) {
                 DatePicker datePicker = new DatePicker(this);
+                datePicker.Title.Text = "Enter your birthdate";
                 datePicker.Value = calculator.BirthDate;
                 if (datePicker.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     calculator.BirthDate = datePicker.Value;
