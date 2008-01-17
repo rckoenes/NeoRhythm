@@ -34,12 +34,17 @@ namespace TripleSoftware.NeoRhythm.Data
         }
 
 		public DateTime CurrentDate {
-			get { return currentDate; }
-			set { currentDate = value; }
+			get { 
+                return currentDate; 
+            }
+			set { 
+                currentDate = value;
+                FireUpdate();
+            }
 		}
 		
 		public int DaysSinceBirth{
-			get { return currentDate.Subtract(birthDate).Days; }
+			get { return currentDate.Subtract(birthDate).Days + 1; }
 		}
 		
 		public double Physical{
@@ -54,7 +59,8 @@ namespace TripleSoftware.NeoRhythm.Data
 		}
 		
 		private double CalculateRhithm(int periode, int days){
-			return (Math.Sin((2*Math.PI*days)/periode)*100);
+
+			return (Math.Sin((2*Math.PI*Convert.ToDouble(days))/Convert.ToDouble(periode)));
 		}
 		
 		public BiorhythmCalculator()

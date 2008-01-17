@@ -42,10 +42,20 @@ namespace TripleSoftware.NeoRhythm.Views
 
         private void OnCalculatorUpdate(object sender, EventArgs e) 
         {
+            int physical;
+            int emotional;
+            int intellactual;
+
+            physical = Convert.ToInt32((Math.Round(calculator.Physical, 0) + 100) / 2);
+            emotional = Convert.ToInt32((Math.Round(calculator.Emotional, 0) + 100) / 2);
+            intellactual = Convert.ToInt32((Math.Round(calculator.Intellactual, 0) + 100) / 2);
+
             birthDateListItem.Text = "Birthdate: " + calculator.BirthDate.ToShortDateString();
-            physicalListItem.Text = "Physical: " + calculator.Physical.ToString();
-            emotionalListItem.Text = "Emotional: " + calculator.Emotional.ToString();
-            intellectualListItem.Text = "Intellectual: " + calculator.Intellactual.ToString();
+            physicalListItem.Text = String.Format("Physical: {0}%", physical);
+            emotionalListItem.Text = String.Format("Emotional: {0}%", emotional);
+            intellectualListItem.Text = String.Format("Intellectual: {0}%", intellactual);
+
+            this.Title.Text = calculator.CurrentDate.ToShortDateString();
         }
 
         private void OnClick(object o, EventArgs e)

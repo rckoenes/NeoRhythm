@@ -15,7 +15,6 @@ namespace TripleSoftware.NeoRhythm.Views
         public StandardGraphView(BiorhythmCalculator calculator)
         {
             this.calculator = calculator;
-            this.Title.Text = calculator.CurrentDate.ToShortDateString();
             calculator.Updated += new EventHandler(OnCalculatorUpdate);
 
             this.LeftSweep.Occurred += new System.ComponentModel.CancelEventHandler(LeftSweep_Occurred);
@@ -23,26 +22,29 @@ namespace TripleSoftware.NeoRhythm.Views
 
             this.RightSweep.Occurred += new System.ComponentModel.CancelEventHandler(RightSweep_Occurred);
             this.RightSweep.Enabled = true;
+
+            OnCalculatorUpdate(this, EventArgs.Empty);
         }
 
         private void LeftSweep_Occurred(object sender, CancelEventArgs e)
         {
-
+            calculator.CurrentDate = calculator.CurrentDate.AddDays(-1);
         }
 
         private void RightSweep_Occurred(object sender,CancelEventArgs e)
         {
-            
+            calculator.CurrentDate = calculator.CurrentDate.AddDays(1);
         }
 
         private void OnCalculatorUpdate(object sender, EventArgs e)
         {
             this.Description.Text = "Biorhythm for : " + calculator.BirthDate.ToShortDateString();
+            this.Title.Text = calculator.CurrentDate.ToShortDateString();
         }
 
         protected void DoPaint(PaintEventArgs e)
         {
-
+            
         }
     }
 }

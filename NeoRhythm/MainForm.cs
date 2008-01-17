@@ -35,7 +35,6 @@ namespace TripleSoftware.NeoRhythm
             tabView.Closed += new EventHandler(OnClose);
             
             this.Load += new EventHandler(MainForm_Load);
-
         }
 
         private void OnClose(object sender, EventArgs e)
