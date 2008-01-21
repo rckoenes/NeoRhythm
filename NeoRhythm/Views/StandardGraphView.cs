@@ -23,8 +23,12 @@ namespace TripleSoftware.NeoRhythm.Views
             this.RightSweep.Occurred += new System.ComponentModel.CancelEventHandler(RightSweep_Occurred);
             this.RightSweep.Enabled = true;
 
-            OnCalculatorUpdate(this, EventArgs.Empty);
+            this.Paint += new EventHandler<PaintEventArgs>(DoPaint);
+
+            OnCalculatorUpdate(this, EventArgs.Empty);  
         }
+
+
 
         private void LeftSweep_Occurred(object sender, CancelEventArgs e)
         {
@@ -40,11 +44,44 @@ namespace TripleSoftware.NeoRhythm.Views
         {
             this.Description.Text = "Biorhythm for : " + calculator.BirthDate.ToShortDateString();
             this.Title.Text = calculator.CurrentDate.ToShortDateString();
+            this.Invalidate();
         }
 
-        protected void DoPaint(PaintEventArgs e)
+        protected void DoPaint(object sender, PaintEventArgs e)
         {
-            
+            int[] physical = calculator.GetPhysical();
+            int[] emotional = calculator.GetEmotional();
+            int[] intellectual = calculator.GetIntellactual();
+            int top = 126;
+            Point[] graphPhysical = new Point[physical.Length];
+            Point[] graphEmotional = new Point[emotional.Length];
+            Point[] graphIntellectual = new Point[intellectual.Length];
+
+            int x =  Width / physical.Length;
+
+            for (int i = 0; i < graphPhysical.Length; i++) {
+                graphPhysical[i] = new Point();
+                graphPhysical[i].Y = top - physical[i];
+                graphPhysical[i].X = x * i;
+            }
+
+            for (int i = 0; i < graphEmotional.Length; i++) {
+                graphEmotional[i] = new Point();
+                graphEmotional[i].Y = top - emotional[i];
+                graphEmotional[i].X = x * i;
+            }
+
+            for (int i = 0; i < graphIntellectual.Length; i++) {
+                graphIntellectual[i] = new Point();
+                graphIntellectual[i].Y = top - intellectual[i];
+                graphIntellectual[i].X = x * i;
+            }
+
+            e.Graphics.DrawLines(new Pen(Color.Red), graphPhysical);
+            e.Graphics.DrawLines(new Pen(Color.Green), graphEmotional);
+            e.Graphics.DrawLines(new Pen(Color.Yellow), graphIntellectual);
+
+            base.OnPaint(e);
         }
     }
 }
