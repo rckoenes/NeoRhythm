@@ -1,7 +1,16 @@
-
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeoRhythm", "NeoRhythm\NeoRhythm.csproj", "{6FC6C0EA-92EE-4FEE-A330-D81A09028E6C}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NeoRhythm", "install\NeoRhythm\NeoRhythm.vdproj", "{5D10C16F-42D8-4C5E-9192-BE17FA0EC5FD}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +24,10 @@ Global
 		{6FC6C0EA-92EE-4FEE-A330-D81A09028E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FC6C0EA-92EE-4FEE-A330-D81A09028E6C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FC6C0EA-92EE-4FEE-A330-D81A09028E6C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5D10C16F-42D8-4C5E-9192-BE17FA0EC5FD}.Debug|Any CPU.ActiveCfg = Debug
+		{5D10C16F-42D8-4C5E-9192-BE17FA0EC5FD}.Debug|Any CPU.Build.0 = Debug
+		{5D10C16F-42D8-4C5E-9192-BE17FA0EC5FD}.Release|Any CPU.ActiveCfg = Release
+		{5D10C16F-42D8-4C5E-9192-BE17FA0EC5FD}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

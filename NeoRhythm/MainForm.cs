@@ -11,9 +11,11 @@ namespace TripleSoftware.NeoRhythm
 {
     class MainForm : Form
     {
-        StandardGraphView standardGraphView;
+        private StandardGraphView standardGraphView;
         //ExtraGraphView extraGraphView = new ExtraGraphView();
-        PercentageView percentageView;
+        private PercentageView percentageView;
+        private SettingMenu settingsMenu;
+
 
         BiorhythmCalculator calculator;
 
@@ -25,17 +27,31 @@ namespace TripleSoftware.NeoRhythm
 
             standardGraphView = new StandardGraphView(calculator);
             percentageView = new PercentageView(calculator);
+            settingsMenu = new SettingMenu(this.Handle, calculator);
 
             tabView = new TabView(this.Handle);
             
             tabView.TabPages.Add(new TabPage(standardGraphView, "Standard"));
             //tabView.TabPages.Add(new TabPage(extraGraphView, "Extra"));
             tabView.TabPages.Add(new TabPage(percentageView, "Percentage"));
-            
-            tabView.Closed += new EventHandler(OnClose);
-            
-            this.Load += new EventHandler(MainForm_Load);
+            tabView.ToolsSweep.Enabled = true;
+            tabView.ToolsSweep.Occurred += new System.ComponentModel.CancelEventHandler(ToolsSweep_Occurred);
 
+            percentageView.ToolsSweep.Enabled = true;
+            percentageView.ToolsSweep.Occurred += new System.ComponentModel.CancelEventHandler(ToolsSweep_Occurred);
+
+            standardGraphView.ToolsSweep.Enabled = true;
+            standardGraphView.ToolsSweep.Occurred += new System.ComponentModel.CancelEventHandler(ToolsSweep_Occurred);
+
+            tabView.Closed += new EventHandler(OnClose);
+
+            this.Load += new EventHandler(MainForm_Load);
+        }
+
+        void ToolsSweep_Occurred(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            settingsMenu.Show();
         }
 
         private void OnClose(object sender, EventArgs e)

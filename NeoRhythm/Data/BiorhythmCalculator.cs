@@ -5,11 +5,6 @@ using System.Collections.Generic;
 namespace TripleSoftware.NeoRhythm.Data
 {
 
-    public enum ChartInterval{
-        TwoWeeks,
-        SevenDays
-    }
-
 	/// <summary>
 	/// Description of BiorhythmCalculator.
 	/// </summary>
@@ -18,8 +13,6 @@ namespace TripleSoftware.NeoRhythm.Data
 		private const int physical = 23;
 		private const int emotional = 28;
 		private const int intellectual = 33;
-
-        private ChartInterval interval = ChartInterval.TwoWeeks;
 
 		private DateTime currentDate;
 		private DateTime birthDate;
@@ -71,49 +64,31 @@ namespace TripleSoftware.NeoRhythm.Data
 			get { return CalculateRhithm( intellectual, DaysSinceBirth); }
 		}
 
-        public int[] GetPhysical()
-        { 
+        private int[] Calculate5Day(int periode)
+        {
             List<int> result = new List<int>();
 
-            //if(interval == ChartInterval.TwoWeeks){
-                for(int i = -7; i <= 7; i++){
-                    double rhytm = CalculateRhithm(physical, (this.DaysSinceBirth + i));
-                    int point = Convert.ToInt32((Math.Round(rhytm, 0) + 100) / 2);
-                    result.Add(point);
-                }
-            //}
-
+            for (int i = -5; i <= 6; i++) {
+                double rhytm = CalculateRhithm(periode, (this.DaysSinceBirth + i));
+                int point = Convert.ToInt32((Math.Round(rhytm, 0) + 100) / 2);
+                result.Add(point);
+            }
             return result.ToArray();
+        }
+        
+        public int[] GetPhysical()
+        {
+            return Calculate5Day(physical);
         }
 
         public int[] GetEmotional()
         {
-            List<int> result = new List<int>();
-
-            //if(interval == ChartInterval.TwoWeeks){
-            for (int i = -7; i <= 7; i++) {
-                double rhytm = CalculateRhithm(emotional, (this.DaysSinceBirth + i));
-                int point = Convert.ToInt32((Math.Round(rhytm, 0) + 100) / 2);
-                result.Add(point);
-            }
-            //}
-
-            return result.ToArray();
+            return Calculate5Day(emotional);
         }
 
         public int[] GetIntellactual()
         {
-            List<int> result = new List<int>();
-
-            //if(interval == ChartInterval.TwoWeeks){
-            for (int i = -7; i <= 7; i++) {
-                double rhytm = CalculateRhithm(intellectual, (this.DaysSinceBirth + i));
-                int point = Convert.ToInt32((Math.Round(rhytm, 0) + 100) / 2);
-                result.Add(point);
-            }
-            //}
-
-            return result.ToArray();
+            return Calculate5Day(intellectual);
         }
 
 		private double CalculateRhithm(int periode, int days){

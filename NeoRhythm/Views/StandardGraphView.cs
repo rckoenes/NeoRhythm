@@ -11,6 +11,7 @@ namespace TripleSoftware.NeoRhythm.Views
     public class StandardGraphView : CustomView
     {
         private BiorhythmCalculator calculator;
+        Image graphImage = new Bitmap(176, 126);
 
         public StandardGraphView(BiorhythmCalculator calculator)
         {
@@ -29,7 +30,6 @@ namespace TripleSoftware.NeoRhythm.Views
         }
 
 
-
         private void LeftSweep_Occurred(object sender, CancelEventArgs e)
         {
             calculator.CurrentDate = calculator.CurrentDate.AddDays(-1);
@@ -42,45 +42,77 @@ namespace TripleSoftware.NeoRhythm.Views
 
         private void OnCalculatorUpdate(object sender, EventArgs e)
         {
+            BuildGraphs();
             this.Description.Text = "Biorhythm for : " + calculator.BirthDate.ToShortDateString();
             this.Title.Text = calculator.CurrentDate.ToShortDateString();
             this.Invalidate();
         }
 
-        protected void DoPaint(object sender, PaintEventArgs e)
+        private void BuildGraphs()
         {
+            Graphics graph = Graphics.FromImage(graphImage);
+            Font font = new Font(FontFamily.GenericSerif, 10, FontStyle.Regular);
+
+            graph.FillRectangle(new SolidBrush(Color.Black), 0, 0, 176, 126);
+
+            int top = 100;
+            int x = 16;
             int[] physical = calculator.GetPhysical();
             int[] emotional = calculator.GetEmotional();
             int[] intellectual = calculator.GetIntellactual();
-            int top = 126;
             Point[] graphPhysical = new Point[physical.Length];
             Point[] graphEmotional = new Point[emotional.Length];
             Point[] graphIntellectual = new Point[intellectual.Length];
 
-            int x =  Width / physical.Length;
-
+            Pen linePen = new Pen(Color.DarkGray);
+            
             for (int i = 0; i < graphPhysical.Length; i++) {
+                int xpos = x * i;
+
                 graphPhysical[i] = new Point();
                 graphPhysical[i].Y = top - physical[i];
-                graphPhysical[i].X = x * i;
-            }
+                graphPhysical[i].X = xpos;
 
-            for (int i = 0; i < graphEmotional.Length; i++) {
                 graphEmotional[i] = new Point();
                 graphEmotional[i].Y = top - emotional[i];
-                graphEmotional[i].X = x * i;
-            }
+                graphEmotional[i].X = xpos;
 
-            for (int i = 0; i < graphIntellectual.Length; i++) {
                 graphIntellectual[i] = new Point();
                 graphIntellectual[i].Y = top - intellectual[i];
-                graphIntellectual[i].X = x * i;
+                graphIntellectual[i].X = xpos;
+
+                if (i == 6 || i == 0 || i == 11)
+                    graph.DrawLine(new Pen(Color.LightGray), xpos, 0, xpos, 110);
+                else
+                    graph.DrawLine(linePen, xpos, 0, xpos, 100);
+
             }
 
-            e.Graphics.DrawLines(new Pen(Color.Red), graphPhysical);
-            e.Graphics.DrawLines(new Pen(Color.Green), graphEmotional);
-            e.Graphics.DrawLines(new Pen(Color.Yellow), graphIntellectual);
+            graph.DrawLine(linePen, 176, 0, 176, 110);
 
+            string beginDate = calculator.CurrentDate.AddDays(-5).ToString("d-M");
+            string nowDate = calculator.CurrentDate.ToString("d-M");
+            string endDate = calculator.CurrentDate.AddDays(5).ToString("d-M");
+
+            graph.DrawString(beginDate, font, new SolidBrush( Color.DarkGray), 0, 102 );
+            graph.DrawString(nowDate , font, new SolidBrush(Color.DarkGray), 80, 102);
+
+            SizeF left = graph.MeasureString(endDate, font);
+            graph.DrawString(endDate, font, new SolidBrush(Color.DarkGray), (178 -left.Width), 102);
+
+
+            graph.DrawLines(new Pen(Color.Red), graphPhysical);
+            graph.DrawString("Physical", font, new SolidBrush(Color.Red), 0, 110);
+            graph.DrawLines(new Pen(Color.Green), graphEmotional);
+            graph.DrawString("Emotional", font, new SolidBrush(Color.Green), 50, 110);
+            graph.DrawLines(new Pen(Color.Yellow), graphIntellectual);
+            graph.DrawString("Intellectual", font, new SolidBrush(Color.Yellow), 112, 110);
+        }
+
+        protected void DoPaint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(graphImage, 0,26);
+            
             base.OnPaint(e);
         }
     }
