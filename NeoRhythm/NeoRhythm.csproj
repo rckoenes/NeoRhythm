@@ -47,7 +47,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\BiorhythmCalculator.cs" />
-    <Compile Include="Data\Settings.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -69,7 +69,7 @@ namespace TripleSoftware.NeoRhythm
             tabView.Show();
             if (calculator.BirthDate == DateTime.MinValue)
             {
-                DatePicker datePicker = new DatePicker(tabView)
+                DatePicker datePicker = new DatePicker(tabView); 
                 datePicker.Title.Text = "Enter your birthdate";
                 datePicker.Value = calculator.BirthDate;
                 if (datePicker.ShowDialog() == System.Windows.Forms.DialogResult.OK)

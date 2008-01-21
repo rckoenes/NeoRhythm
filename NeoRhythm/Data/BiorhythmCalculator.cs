@@ -104,15 +104,13 @@ namespace TripleSoftware.NeoRhythm.Data
 
         public void Save()
         {
-            Settings setting = new Settings(true);
-            setting.SaveSetting("NeoRhtyhm", "BirthDate", "BirthDate", this.BirthDate.ToString());
+
         }
 
         public void Load()
         {
-            Settings setting = new Settings(true);
-            string date = setting.GetSetting("NeoRhtyhm", "BirthDate", "BirthDate", DateTime.MinValue.ToString());
-            this.BirthDate = Convert.ToDateTime(date);
+            this.birthDate = DateTime.MinValue;
+                 
         }
 
 	}
