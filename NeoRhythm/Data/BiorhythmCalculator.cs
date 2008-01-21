@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 
+
 namespace TripleSoftware.NeoRhythm.Data
 {
 
@@ -101,6 +102,18 @@ namespace TripleSoftware.NeoRhythm.Data
 			currentDate = DateTime.Now;	
 		}
 
+        public void Save()
+        {
+            Settings setting = new Settings(true);
+            setting.SaveSetting("NeoRhtyhm", "BirthDate", "BirthDate", this.BirthDate.ToString());
+        }
+
+        public void Load()
+        {
+            Settings setting = new Settings(true);
+            string date = setting.GetSetting("NeoRhtyhm", "BirthDate", "BirthDate", DateTime.MinValue.ToString());
+            this.BirthDate = Convert.ToDateTime(date);
+        }
 
 	}
 }

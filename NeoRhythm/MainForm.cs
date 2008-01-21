@@ -24,6 +24,8 @@ namespace TripleSoftware.NeoRhythm
         public MainForm()
         {
             calculator = new BiorhythmCalculator();
+            calculator.Load();
+
 
             standardGraphView = new StandardGraphView(calculator);
             percentageView = new PercentageView(calculator);
@@ -56,6 +58,7 @@ namespace TripleSoftware.NeoRhythm
 
         private void OnClose(object sender, EventArgs e)
         {
+            calculator.Save();
             WinForms.Application.Exit();
         }
 
@@ -64,6 +67,16 @@ namespace TripleSoftware.NeoRhythm
             tabView.SelectedIndex = 0;
             standardGraphView.Show();
             tabView.Show();
+            if (calculator.BirthDate == DateTime.MinValue)
+            {
+                DatePicker datePicker = new DatePicker(tabView)
+                datePicker.Title.Text = "Enter your birthdate";
+                datePicker.Value = calculator.BirthDate;
+                if (datePicker.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    calculator.BirthDate = datePicker.Value;
+
+                datePicker.Dispose();
+            }
         }
 
     }

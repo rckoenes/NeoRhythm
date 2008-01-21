@@ -474,7 +474,7 @@
         {
             "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_6B89572144254FF79C779B246574D83A"
             {
-            "SourcePath" = "8:..\\..\\NeoRhythm\\obj\\Debug\\NeoRhythm.exe"
+            "SourcePath" = "8:..\\..\\NeoRhythm\\obj\\Release\\NeoRhythm.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2D8BEFD2A48448698997537FC57D60EE"

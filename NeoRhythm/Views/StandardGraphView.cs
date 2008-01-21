@@ -64,10 +64,15 @@ namespace TripleSoftware.NeoRhythm.Views
             Point[] graphEmotional = new Point[emotional.Length];
             Point[] graphIntellectual = new Point[intellectual.Length];
 
-            Pen linePen = new Pen(Color.DarkGray);
+            Pen linePen = new Pen(Color.FromArgb(37,37,37));
             
             for (int i = 0; i < graphPhysical.Length; i++) {
                 int xpos = x * i;
+
+                if (i == 5 || i == 0 || i == 11)
+                    graph.DrawLine(new Pen(Color.LightGray), xpos, 0, xpos, 110);
+                else
+                    graph.DrawLine(linePen, xpos, 0, xpos, 100);
 
                 graphPhysical[i] = new Point();
                 graphPhysical[i].Y = top - physical[i];
@@ -80,25 +85,18 @@ namespace TripleSoftware.NeoRhythm.Views
                 graphIntellectual[i] = new Point();
                 graphIntellectual[i].Y = top - intellectual[i];
                 graphIntellectual[i].X = xpos;
-
-                if (i == 6 || i == 0 || i == 11)
-                    graph.DrawLine(new Pen(Color.LightGray), xpos, 0, xpos, 110);
-                else
-                    graph.DrawLine(linePen, xpos, 0, xpos, 100);
-
             }
 
-            graph.DrawLine(linePen, 176, 0, 176, 110);
+            graph.DrawLine(new Pen(Color.LightGray), 175, 0, 175, 110);
 
             string beginDate = calculator.CurrentDate.AddDays(-5).ToString("d-M");
             string nowDate = calculator.CurrentDate.ToString("d-M");
             string endDate = calculator.CurrentDate.AddDays(5).ToString("d-M");
 
-            graph.DrawString(beginDate, font, new SolidBrush( Color.DarkGray), 0, 102 );
-            graph.DrawString(nowDate , font, new SolidBrush(Color.DarkGray), 80, 102);
-
             SizeF left = graph.MeasureString(endDate, font);
-            graph.DrawString(endDate, font, new SolidBrush(Color.DarkGray), (178 -left.Width), 102);
+            graph.DrawString(beginDate, font, new SolidBrush( Color.DarkGray), 0, 103 );
+            graph.DrawString(nowDate, font, new SolidBrush(Color.DarkGray), 80, 103);
+            graph.DrawString(endDate, font, new SolidBrush(Color.DarkGray), (176 - left.Width), 103);
 
 
             graph.DrawLines(new Pen(Color.Red), graphPhysical);

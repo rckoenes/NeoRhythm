@@ -18,19 +18,20 @@ namespace TripleSoftware.NeoRhythm.Views
             this.calculator = calculator;
             this.owner = owner;
             MenuPage item = new MenuPage();
-                
-            //base.ImageList = ImageList.FromResource(
+
+            base.ImageList = ImageList.FromResource(Assembly.GetExecutingAssembly(), "TripleSoftware.NeoRhythm.Resource.resources", "tool", 48);
+
             base.TabPages.Add(item);
             
-            //item.Buttons[0].ImageIndex = 0;
+            item.Buttons[0].ImageIndex = 0;
             item.Buttons[0].Text = "Set Birthday";
             item.Buttons[0].Click += new CancelEventHandler(birthdayClick);
             item.Buttons[0].Enabled = true;
-            //item.Buttons[4].ImageIndex = 1;
+            item.Buttons[1].ImageIndex = 1;
             item.Buttons[1].Text = "Set day";
             item.Buttons[1].Click += new CancelEventHandler(setdayClick);
             item.Buttons[1].Enabled = true;
-            //item.Buttons[2].ImageIndex = 2;
+            item.Buttons[2].ImageIndex = 2;
             item.Buttons[2].Text = "About";
             item.Buttons[2].Click += new CancelEventHandler(aboutClick);
             item.Buttons[2].Enabled = true;
