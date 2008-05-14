@@ -38,8 +38,6 @@ namespace TripleSoftware.NeoRhythm.Views
             
             base.CloseViewSweep.Enabled = true;
             base.CloseViewSweep.Occurred +=new CancelEventHandler(CloseViewSweep_Occurred);
-
-
         }
 
         void  CloseViewSweep_Occurred(object sender, CancelEventArgs e)
@@ -60,6 +58,7 @@ namespace TripleSoftware.NeoRhythm.Views
                 calculator.BirthDate = datePicker.Value;
 
             datePicker.Dispose();
+            this.Hide();
         }
 
         void setdayClick(object sender, System.ComponentModel.CancelEventArgs e)
@@ -72,12 +71,15 @@ namespace TripleSoftware.NeoRhythm.Views
                 calculator.CurrentDate = datePicker.Value;
 
             datePicker.Dispose();
+            this.Hide();
         }
         
         void aboutClick(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
+
             MessageBox.Show(owner, "For Neonode N2\n\n\x00a9 2008 Triple Software \n\n Coded by Remmelt Koenes", "NeoRhythm " + Assembly.GetExecutingAssembly().GetName().Version);
+            this.Hide();
         } 
 
     }

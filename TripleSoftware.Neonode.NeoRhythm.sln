@@ -1,16 +1,8 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeoRhythm", "NeoRhythm\NeoRhythm.csproj", "{6FC6C0EA-92EE-4FEE-A330-D81A09028E6C}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "NeoRhythm", "Install\NeoRhythm\NeoRhythmInstall.vddproj", "{40A47369-6E72-4655-A106-E1FAEB93EE9D}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
